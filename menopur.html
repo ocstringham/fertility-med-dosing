@@ -63,7 +63,7 @@
                 <!-- Sidebar -->
                 <div class="sidebar col-2 bg-light d-none d-lg-block">
                     <!-- Add your sidebar content here -->
-                    <div class="h3 text-left">Medicines</div>
+                    <!-- <div class="h3 text-left">Medicines</div> -->
                     <ul class="list-group">
                         <li class="list-group-item"> <a class="nav-link active" aria-current="page" href="cetrotide.html">
                             Cetrotide</a>
@@ -78,9 +78,9 @@
                 </div>
     
                 <!-- Main Content -->
-                <div class="col-sm-6 col-lg-5">
+                <div class="col-sm-6 col-lg-5 mb-3">
 
-                    <div  id="input-col" class="mt-2 align-middle border rounded border-primary p-3">
+                    <div  id="input-col" class="card mt-2 align-middle border rounded border-primary p-3">
 
                         <div class="h2 text-center mt-2 mb-3">Menopur Dosing</div>
 
@@ -91,8 +91,8 @@
                             <small hidden id="valVials" class="form-text text-danger">Input a number</small>
                         </div>
 
-                        <div class="mb-2 d-flex justify-content-center">
-                            <div class="text-right">
+                        <div class="mb-2">
+                            <div class="text-center">
                                 <label for="" class="form-label">The patient will start the medicine: </label>
                                 <select class="form-select form-select-lg" name="" id="start">
                                     <option value="today">Today</option>
@@ -106,8 +106,8 @@
                         <div class="mb-3">
                             <div class="row ">
                                 <!-- <div class="h6"></div> -->
-                                <div class='col-md-6' id="all-doses-col1"></div>
-                                <div class='col-md-6' id="all-doses-col2"></div>
+                                <div class='col-6' id="all-doses-col1"></div>
+                                <div class='col-6' id="all-doses-col2"></div>
                             </div>
                         </div>
 
@@ -124,18 +124,17 @@
 
 
                 <!-- Output: When med runs out -->
-                <div class="col-sm-6 col-lg-5">
-                    <div id="output-col" class="align-middle text-center mt-2 mr-2 border rounded border-primary">
+                <div class="col-sm-6 col-lg-5 mb-3">
+                    <div id="output-col" class="card align-middle text-center mt-2 mr-2 border rounded border-primary">
                         <div class="h5 mt-3 ">Medicine will run out on: </div>
                         <div class="h4" id="run-out"></div>
                     </div>
-               
                 </div>
 
             </div>
         </div>
 
-        <div class="footer fixed-bottom bg-light text-center text-lg-start">
+        <div class="footer bg-light text-center text-lg-start">
             <!-- Copyright -->
             <div class="text-center p-3">
               <small>This website was made by Oliver Stringham.</small>
@@ -156,15 +155,15 @@
 
         <script>
 
-            // height for cols
-            $(document).ready(function(){
-                let height = $('#input-col').css('height');
-                $('#output-col').css('height', height);
-            });
+            // // height for cols
+            // $(document).ready(function(){
+            //     let height = $('#input-col').css('height');
+            //     $('#output-col').css('height', height);
+            // });
             
             // Add days for dose
             function doseElem(n) {
-                return `<div class="text-right align-text-bottom d-flex justify-content-around" >
+                return `<div class="text-right align-text-bottom" >
                             <label for="" class="form-label">Day ${n}</label>
                             <select class="form-select form-select-lg" name="" id="dose${n}">
                                 <option value="0" selected>Select Dose </option>
