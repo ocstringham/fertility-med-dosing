@@ -40,9 +40,10 @@
 
 
         <div class="container-fluid">
-            <div class="row">
+            <div class="row h-100">
+
                 <!-- Sidebar -->
-                <div class="col-sm-2 bg-light d-none d-md-block">
+                <div class="col-md-2 bg-light d-none d-md-block">
                     <!-- Add your sidebar content here -->
                     <h3>Choose Medicine</h3>
                     <ul class="list-group">
@@ -53,18 +54,18 @@
                 </div>
     
                 <!-- Main Content -->
-                <div class="col-md-3">
+                <div class="col-sm-3">
 
-                    <div class="h2">Menopure</div>
+                    <div class="h2 text-center mt-2 mb-3">Menopur Dosing</div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 text-center">
                       <label for="" class="form-label">Number of vials on hand: </label>
                       <input class="form-control-md" type="number" 
                              id="quantity" name="quantity" min="1" max="50">
                       <small hidden id="valVials" class="form-text text-danger">Input a number</small>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-2 text-right">
                         <label for="" class="form-label">The patient will start the medicine: </label>
                         <select class="form-select form-select-lg" name="" id="start">
                             <option value="today">Today</option>
@@ -73,23 +74,13 @@
                     </div>
 
 
-                    <!-- single dose -->
-                    <!-- <div class="mb-3">
-                        <label for="" class="form-label">Dose</label>
-                        <select class="form-select form-select-lg" name="" id="dose">
-                            <option selected>Select Dose</option>
-                            <option value="1">75 units</option>
-                            <option value="2">150 units</option>
-                        </select>
-                    </div> -->
-
-
                     <!-- vary dose by day -->
                     <div class="row">
                         <!-- <div class="h6"></div> -->
                         <div class='col-md-6' id="all-doses-col1"></div>
                         <div class='col-md-6' id="all-doses-col2"></div>
                     </div>
+
 
                     <!--  submit button -->
                     <div class="row justify-content-center mt-3">
@@ -101,9 +92,12 @@
 
 
                 <!-- When med runs out -->
-                <div class="card border-primary mt-1 mr-1">
-                    <div class="h5 mt-3 text-center">Medicine will run out on: </div>
-                    <div class="h6" id="run-out"></div>
+                <div class="col-sm-7">
+                    <div class="mt-2 border border-primary h-100">
+                        <div class="h5 mt-3 text-center">Medicine will run out on: </div>
+                        <div class="h6" id="run-out"></div>
+                    </div>
+               
                 </div>
 
             </div>
@@ -119,14 +113,14 @@
             
             // Add days for dose
             function doseElem(n) {
-                return `<div class="">
-                        <label for="" class="form-label">Day ${n}</label>
-                        <select class="form-select form-select-lg" name="" id="dose${n}">
-                            <option value="0" selected>Select Dose </option>
-                            <option value="1">75 units</option>
-                            <option value="2">150 units</option>
-                        </select>
-                    </div>`
+                return `<div class=" text-right align-text-bottom">
+                            <label for="" class="form-label">Day ${n}</label>
+                            <select class="form-select form-select-lg" name="" id="dose${n}">
+                                <option value="0" selected>Select Dose </option>
+                                <option value="1">75 units</option>
+                                <option value="2">150 units</option>
+                            </select>
+                        </div>`
             }
 
             var doseMany1 = document.getElementById('all-doses-col1');
@@ -200,8 +194,8 @@
 
                 if(currentNum > sumAllDoses){
 
-                    return "Patient will have vials remaining."
-
+                    const nLeft = currentNum - sumAllDoses
+                    return `Patient will have ${nLeft} vial(s) remaining.`
 
                 }else{
                     var nDaysLeft = Math.trunc(currentNum /  sumAllDoses)
@@ -214,12 +208,8 @@
                     const result = someDate.setDate(someDate.getDate() + nDaysLeft);
 
                     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-
                     return new Date(result).toLocaleDateString("en-US", options)
                 }
-
-
-
             }
 
 
