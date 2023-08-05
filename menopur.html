@@ -11,29 +11,37 @@
         <!-- Bootstrap CSS -->
         <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/minty/bootstrap.min.css" integrity="sha384-H4X+4tKc7b8s4GoMrylmy2ssQYpDHoqzPa9aKXbDwPoPUA3Ra8PA5dGzijN+ePnH" crossorigin="anonymous">
+        <style>
+            .sidebar{
+                /* background-color: #f5f5f5; */
+                padding-right: 20px;
+                padding-top: 20px;
+                min-height: calc(100vh - 112px);
+            }
+        </style>
     </head>
     <body>
 
         <!-- navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-primary" data-bs-theme="dark">
             <div class="container-fluid">
-            <a class="navbar-brand" href="#">Med</a>
+            <a class="navbar-brand" href="#">Fertility Medicine Dosing</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">Medicines</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
                 </li>
                 </ul>
-                <!-- <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-                </form> -->
             </div>
             </div>
         </nav>
@@ -43,65 +51,92 @@
             <div class="row h-100">
 
                 <!-- Sidebar -->
-                <div class="col-md-2 bg-light d-none d-md-block">
+                <div class="sidebar col-md-2 bg-light d-none d-md-block">
                     <!-- Add your sidebar content here -->
-                    <h3>Choose Medicine</h3>
+                    <h3>Medicine</h3>
                     <ul class="list-group">
-                        <li class="list-group-item">Link 1</li>
-                        <li class="list-group-item">Link 2</li>
-                        <li class="list-group-item">Link 3</li>
+                        <li class="list-group-item"> <a class="nav-link active" aria-current="page" href="cetrotide.html">
+                            Cetrotide</a>
+                        </li>
+                        <li class="list-group-item"> <a class="nav-link active" aria-current="page" href="menopur.html">
+                            Menopur</a>
+                        </li>
+                        <li class="list-group-item"> <a class="nav-link active" aria-current="page" href="gonalf.html">
+                            Gonal-f Pen</a>
+                        </li>
                     </ul>
                 </div>
     
                 <!-- Main Content -->
-                <div class="col-sm-3">
+                <div class="col-sm-5">
 
-                    <div class="h2 text-center mt-2 mb-3">Menopur Dosing</div>
+                    <div  id="input-col" class="mt-2 align-middle border rounded border-primary p-3">
 
-                    <div class="mb-3 text-center">
-                      <label for="" class="form-label">Number of vials on hand: </label>
-                      <input class="form-control-md" type="number" 
-                             id="quantity" name="quantity" min="1" max="50">
-                      <small hidden id="valVials" class="form-text text-danger">Input a number</small>
+                        <div class="h2 text-center mt-2 mb-3">Menopur Dosing</div>
+
+                        <div class="mb-3 text-center">
+                            <label for="" class="form-label">Number of vials on hand: </label>
+                            <input class="form-control-md text-center" type="number" 
+                                    id="quantity" name="quantity" min="1" max="50">
+                            <small hidden id="valVials" class="form-text text-danger">Input a number</small>
+                        </div>
+
+                        <div class="mb-2 d-flex justify-content-center">
+                            <div class="text-right">
+                                <label for="" class="form-label">The patient will start the medicine: </label>
+                                <select class="form-select form-select-lg" name="" id="start">
+                                    <option value="today">Today</option>
+                                    <option value="tomorrow">Tomorrow</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <!-- vary dose by day -->
+                        <div class="mb-3">
+                            <div class="row ">
+                                <!-- <div class="h6"></div> -->
+                                <div class='col-md-6' id="all-doses-col1"></div>
+                                <div class='col-md-6' id="all-doses-col2"></div>
+                            </div>
+                        </div>
+
+
+                        <!--  submit button -->
+                        <div class="row justify-content-center mt-3">
+                            <input name="submit" id="submit" class="btn btn-primary text-center" type="button" value="Submit">
+                        </div>
+
+
                     </div>
-
-                    <div class="mb-2 text-right">
-                        <label for="" class="form-label">The patient will start the medicine: </label>
-                        <select class="form-select form-select-lg" name="" id="start">
-                            <option value="today">Today</option>
-                            <option value="tomorrow">Tomorrow</option>
-                        </select>
-                    </div>
-
-
-                    <!-- vary dose by day -->
-                    <div class="row">
-                        <!-- <div class="h6"></div> -->
-                        <div class='col-md-6' id="all-doses-col1"></div>
-                        <div class='col-md-6' id="all-doses-col2"></div>
-                    </div>
-
-
-                    <!--  submit button -->
-                    <div class="row justify-content-center mt-3">
-                        <input name="submit" id="submit" class="btn btn-primary text-center" type="button" value="Submit">
-                    </div>
-
                 </div>
 
 
 
-                <!-- When med runs out -->
-                <div class="col-sm-7">
-                    <div class="mt-2 border border-primary h-100">
-                        <div class="h5 mt-3 text-center">Medicine will run out on: </div>
-                        <div class="h6" id="run-out"></div>
+                <!-- Output: When med runs out -->
+                <div class="col-sm-5">
+                    <div id="output-col" class="align-middle text-center mt-2 mr-2 border rounded border-primary">
+                        <div class="h5 mt-3 ">Medicine will run out on: </div>
+                        <div class="h4" id="run-out"></div>
                     </div>
                
                 </div>
 
             </div>
         </div>
+
+        <footer class="bg-light text-center text-lg-start">
+            <!-- Copyright -->
+            <div class="text-center p-3">
+              <small>This website was made by Oliver Stringham.</small>
+              <small>
+                <a class="text-dark" href="https://www.buymeacoffee.com/oliverstringham" target="_blank">
+                    You can buy me a coffee ☕ to show your support.</a>
+            </small>
+            </div>
+            <!-- Copyright -->
+        </footer>
+
         
         <!-- jquery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -110,10 +145,16 @@
 
 
         <script>
+
+            // height for cols
+            $(document).ready(function(){
+                let height = $('#input-col').css('height');
+                $('#output-col').css('height', height);
+            });
             
             // Add days for dose
             function doseElem(n) {
-                return `<div class=" text-right align-text-bottom">
+                return `<div class="text-right align-text-bottom d-flex justify-content-around" >
                             <label for="" class="form-label">Day ${n}</label>
                             <select class="form-select form-select-lg" name="" id="dose${n}">
                                 <option value="0" selected>Select Dose </option>
