@@ -1,7 +1,7 @@
 ---
 title: "Home"
 date: 2023-08-06
-layout: "single"
+layout: "home"
 ---
 
 Welcome to my Hugo website! This is the homepage content.
