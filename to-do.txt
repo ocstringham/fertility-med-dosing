@@ -1,5 +1,21 @@
 to do
+- wait for SM feedback functionaly before design
+    - display results better?
+
+- EL to reset when new dose added
+- wording for when still medicine left but not enough
+- site title
+- favicon generic
+- google ads
+
+- clear all input button
+
+- other pages, once sm approves
+-disclaimer
+- footer wording
+
+
+done
 - footer
 - but me a coffee
 - google analytics
-- google ads

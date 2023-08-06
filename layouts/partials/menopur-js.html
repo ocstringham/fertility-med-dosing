@@ -1,0 +1,112 @@
+<script>
+
+    // // height for cols
+    // $(document).ready(function(){
+    //     let height = $('#input-col').css('height');
+    //     $('#output-col').css('height', height);
+    // });
+    
+    // Add days for dose
+    function doseElem(n) {
+        return `<div class="text-right align-text-bottom" >
+                    <label for="" class="form-label">Day ${n}</label>
+                    <select class="form-select form-select-lg" name="" id="dose${n}">
+                        <option value="0" selected>Select Dose </option>
+                        <option value="1">75 units</option>
+                        <option value="2">150 units</option>
+                    </select>
+                </div>`
+    }
+
+    var doseMany1 = document.getElementById('all-doses-col1');
+    var doseMany2 = document.getElementById('all-doses-col2');
+    for (var i = 1; i < 7 ; i++) {
+        doseMany1.innerHTML += doseElem(i);
+        doseMany2.innerHTML += doseElem(i+6);
+    }
+    
+
+    // EL for Submit
+    submitBut = document.getElementById("submit");
+    submitBut.addEventListener("click", function() {
+
+        // get quantity
+        var currentNum = $('#quantity').val();
+        var valVials = document.getElementById("valVials"); // hidden text
+
+        // Validate quantity
+        if(currentNum===""){
+            valVials.removeAttribute("hidden");
+        }else{
+            // make validation hidden again
+            valVials.setAttribute("hidden", true);
+
+            // if current number entered then load calculate date fun
+            const date = calcDate();
+            $('#run-out').html(date);
+        }
+
+
+
+    });
+
+    // EL to reset date when numbers updated
+    numVials = document.getElementById("quantity");
+    numVials.addEventListener('change', function() {
+        $('#run-out').html("");
+    });
+
+    // doseSelected = document.getElementById("dose");
+    // doseSelected.addEventListener('change', function() {
+    //     $('#run-out').html("");
+    // });
+
+    startMed = document.getElementById("start");
+    startMed.addEventListener('change', function() {
+        $('#run-out').html("");
+    });
+
+
+    // Calculate date
+    function calcDate(){
+
+        // get values
+        var currentNum = $('#quantity').val();
+        var start = $('#start').val();
+
+        // get all doses, loop over each div
+        var doses = document.querySelectorAll('[id^="dose"]');
+        const sumDoses = [];
+        for (var i = 0; i < doses.length; i++) {
+            sumDoses.push(parseInt(doses[i].value));
+        }
+
+        // get sum of doses = n_vials
+        const sumAllDoses = sumDoses.reduce((partialSum, a) => partialSum + a, 0);
+        console.log(sumAllDoses);
+
+        // calc n days remaining
+
+        if(currentNum > sumAllDoses){
+
+            const nLeft = currentNum - sumAllDoses
+            return `Patient will have ${nLeft} vial(s) remaining.`
+
+        }else{
+            var nDaysLeft = Math.trunc(currentNum /  sumAllDoses)
+
+            // add in one day if start tomorrow
+            if(start==='tomorrow'){nDaysLeft = nDaysLeft + 1}
+
+            // add to today
+            var someDate = new Date();
+            const result = someDate.setDate(someDate.getDate() + nDaysLeft);
+
+            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(result).toLocaleDateString("en-US", options)
+        }
+    }
+
+
+
+</script>

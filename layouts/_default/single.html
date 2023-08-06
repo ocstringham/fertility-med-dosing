@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+{{ partial "head.html" . }}
+<body>
+
+  <!-- navbar -->
+  {{ partial "navbar.html" . }}
+
+
+  <!--  container -->
+  
+
+
+  <header>
+    <h1><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
+  </header>
+
+
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <!-- footer -->
+  {{ partial "footer.html" . }}
+
+  <!-- js libs -->
+  {{ partial "js-libs.html" . }}
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<div class="container-fluid">
+    <div class="row h-100">
+
+        <!-- Sidebar -->
+        <div class="sidebar col-2 bg-light d-none d-lg-block">
+            <!-- Add your sidebar content here -->
+            <!-- <div class="h3 text-left">Medicines</div> -->
+            <ul class="list-group">
+                <li class="list-group-item"> <a class="nav-link active" aria-current="page" href="cetrotide.html">
+                    Cetrotide</a>
+                </li>
+                <li class="list-group-item"> <a class="nav-link active" aria-current="page" href="menopur.html">
+                    Menopur</a>
+                </li>
+                <li class="list-group-item"> <a class="nav-link active" aria-current="page" href="gonalf.html">
+                    Gonal-f Pen</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-sm-6 col-lg-5 mb-3">
+
+            <div  id="input-col" class="card mt-2 align-middle border rounded border-primary p-3">
+
+                <div class="h2 text-center mt-2 mb-3">Menopur Dosing</div>
+
+                <div class="mb-3 text-center">
+                    <label for="" class="form-label">Number of vials on hand: </label>
+                    <input class="form-control-md text-center" type="number" 
+                            id="quantity" name="quantity" min="1" max="50">
+                    <small hidden id="valVials" class="form-text text-danger">Input a number</small>
+                </div>
+
+                <div class="mb-2">
+                    <div class="text-center">
+                        <label for="" class="form-label">The patient will start the medicine: </label>
+                        <select class="form-select form-select-lg" name="" id="start">
+                            <option value="today">Today</option>
+                            <option value="tomorrow">Tomorrow</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <!-- vary dose by day -->
+                <div class="mb-3">
+                    <div class="row ">
+                        <!-- <div class="h6"></div> -->
+                        <div class='col-6' id="all-doses-col1"></div>
+                        <div class='col-6' id="all-doses-col2"></div>
+                    </div>
+                </div>
+
+
+                <!--  submit button -->
+                <div class="row justify-content-center mt-3">
+                    <input name="submit" id="submit" class="btn btn-primary text-center" type="button" value="Submit">
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+        <!-- Output: When med runs out -->
+        <div class="col-sm-6 col-lg-5 mb-3">
+            <div id="output-col" class="card align-middle text-center mt-2 mr-2 border rounded border-primary">
+                <div class="h5 mt-3 ">Medicine will run out on: </div>
+                <div class="h4" id="run-out"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
