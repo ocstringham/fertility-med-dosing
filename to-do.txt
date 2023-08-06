@@ -11,11 +11,12 @@ to do
 - clear all input button
 
 - other pages, once sm approves
--disclaimer
-- footer wording
+
 
 
 done
 - footer
 - but me a coffee
 - google analytics
+- disclaimer
+- footer wording

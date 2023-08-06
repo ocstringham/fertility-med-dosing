@@ -2,4 +2,3 @@ baseURL = ''
 languageCode = 'en-us'
 title = 'Fertility Medicine Dosing'
 builddrafts = true 
-params.assets.disableFingerprinting = true
