@@ -1,7 +1,7 @@
 <!-- Main Content -->
 <div class="col-xs-auto col-sm-6 col-lg-5 mb-3 justify-content-center">
 
-    <div  id="input-col" class="card mt-2 align-middle border rounded border-primary p-3">
+    <div  id="input-col" class="form card mt-2 p-3 align-middle border rounded border-primary">
 
         <div class="h2 text-center mt-2 mb-3">Menopur Dosing</div>
 
@@ -39,6 +39,9 @@
             <input name="submit" id="submit" class="btn btn-primary text-center" type="button" value="Submit">
         </div>
 
+        <div class="row justify-content-center mt-3">
+            <small class=""><a onClick="window.location.reload();" id="resetAll" href="">Clear inputs</a></small>
+        </div>
 
     </div>
 </div>
@@ -47,7 +50,5 @@
 <!-- Output: When med runs out -->
 <div class="col-sm-6 col-lg-5 mb-3">
     <div id="output-col" class="card align-middle text-center mt-2 mr-1 border rounded border-primary">
-        <div class="h5 mt-3 ">Medicine will run out on: </div>
-        <div class="h4" id="run-out"></div>
     </div>
 </div>

@@ -1,17 +1,21 @@
 to do
-- clear all input button
+- uniform output wording
 - wording for when still medicine left but not enough
     - Patient will take their last full dose on Date?
-    - calculate the above instead of what im currently doing
+    - js calculate the above instead of what im currently doing
 - display results better?
 - page/site title (for head so it doesn't say home for every page)
 - other pages, once sm approves
-- number popup for mobile
+- contact for feedback and errors (formspree?)
+
 --
 - favicon generic
 - google ads
 - page navigates to error when no number submitted
 
+
+maybe
+- clear all input button, change js
 
 done
 - footer
@@ -22,3 +26,5 @@ done
 - responsive layout
 - red outline for input a number error
 - EL to reset when new dose added
+- clear all input button
+- number popup for mobile

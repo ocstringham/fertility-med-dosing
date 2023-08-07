@@ -95,7 +95,7 @@
       
 <div class="col-xs-auto col-sm-6 col-lg-5 mb-3 justify-content-center">
 
-    <div  id="input-col" class="card mt-2 align-middle border rounded border-primary p-3">
+    <div  id="input-col" class="form card mt-2 p-3 align-middle border rounded border-primary">
 
         <div class="h2 text-center mt-2 mb-3">Menopur Dosing</div>
 
@@ -133,6 +133,9 @@
             <input name="submit" id="submit" class="btn btn-primary text-center" type="button" value="Submit">
         </div>
 
+        <div class="row justify-content-center mt-3">
+            <small class=""><a onClick="window.location.reload();" id="resetAll" href="">Clear inputs</a></small>
+        </div>
 
     </div>
 </div>
@@ -141,8 +144,6 @@
 
 <div class="col-sm-6 col-lg-5 mb-3">
     <div id="output-col" class="card align-middle text-center mt-2 mr-1 border rounded border-primary">
-        <div class="h5 mt-3 ">Medicine will run out on: </div>
-        <div class="h4" id="run-out"></div>
     </div>
 </div>
     </div>
@@ -184,25 +185,26 @@
                 </div>`
     }
 
-    var doseMany1 = document.getElementById('all-doses-col1');
-    var doseMany2 = document.getElementById('all-doses-col2');
-    for (var i = 1; i < 7 ; i++) {
-        doseMany1.innerHTML += doseElem(i);
-        doseMany2.innerHTML += doseElem(i+6);
-    }
-    
+    document.addEventListener("DOMContentLoaded", function(){
+        var doseMany1 = document.getElementById('all-doses-col1');
+        var doseMany2 = document.getElementById('all-doses-col2');
+        for (var i = 1; i < 7 ; i++) {
+            doseMany1.innerHTML += doseElem(i);
+            doseMany2.innerHTML += doseElem(i+6);
+        }
+    });
 
     
     submitBut = document.getElementById("submit");
     submitBut.addEventListener("click", function() {
 
         
-        var currentNum = $('#quantity').val();
+        var nVials = $('#quantity').val();
         var valVials = document.getElementById("valVials"); 
         var qBox = document.getElementById("quantity");
 
         
-        if(currentNum===""){
+        if(nVials===""){
             
             valVials.removeAttribute("hidden");
             
@@ -214,70 +216,147 @@
             qBox.className = qBox.className.replace(" border border-danger", ""); 
 
             
-            const date = calcDate();
-            $('#run-out').html(date);
+            const outputHtml = calcOutputString();
+            $('#output-col').html(outputHtml);
         }
     });
 
     
+    defaultOutputHtml = `<br><br><br><br><br><br>`
+
+    document.addEventListener("DOMContentLoaded", function(){
+        $('#output-col').html(defaultOutputHtml);
+    });
+
     numVials = document.getElementById("quantity");
     numVials.addEventListener('change', function() {
-        $('#run-out').html("");
+        $('#output-col').html(defaultOutputHtml);
     });
 
     
     let dosesArray = document.querySelectorAll('[id^="dose"]');
     dosesArray.forEach(function(elem) {
         elem.addEventListener("change", function() {
-            $('#run-out').html("");
+            $('#output-col').html(defaultOutputHtml);
         });
     });
 
     
     startMed = document.getElementById("start");
     startMed.addEventListener('change', function() {
-        $('#run-out').html("");
+        $('#output-col').html(defaultOutputHtml);
     });
 
 
     
-    function calcDate(){
+    
+    
+    
+    
+    
+
+
+    
+    function calcOutputString(){
 
         
-        var currentNum = $('#quantity').val();
+        var nVials = $('#quantity').val();
         var start = $('#start').val();
 
         
         var doses = document.querySelectorAll('[id^="dose"]');
-        const sumDoses = [];
+        const dosesArray = [];
         for (var i = 0; i < doses.length; i++) {
-            sumDoses.push(parseInt(doses[i].value));
+            dosesArray.push(parseInt(doses[i].value));
         }
 
         
-        const sumAllDoses = sumDoses.reduce((partialSum, a) => partialSum + a, 0);
-        console.log(sumAllDoses);
+        const sumAllDoses = dosesArray.reduce((partialSum, a) => partialSum + a, 0);
 
         
+        let trackDoses = nVials;
+        var trackDosesArray = [];
+            for (var i = 0; i < dosesArray.length; i++) {
+                trackDosesArray.push(trackDoses - dosesArray[i]);
+                trackDoses = trackDoses - dosesArray[i];
+            }
+        console.log(trackDosesArray);
 
-        if(currentNum > sumAllDoses){
 
-            const nLeft = currentNum - sumAllDoses
-            return `Patient will have ${nLeft} vial(s) remaining.`
-
-        }else{
-            var nDaysLeft = Math.trunc(currentNum /  sumAllDoses)
+        
+        if(nVials >= sumAllDoses){
 
             
-            if(start==='tomorrow'){nDaysLeft = nDaysLeft + 1}
+            
+            for (var i = dosesArray.length - 1; i >= 0; i--) {
+                if(dosesArray[i] != 0){
+                    var dayIndex = i;
+                    break;
+                }
+            }
+
+            
+            if(start==='tomorrow'){dayIndex = dayIndex + 1;}
 
             
             var someDate = new Date();
-            const result = someDate.setDate(someDate.getDate() + nDaysLeft);
-
+            const result = someDate.setDate(someDate.getDate() + dayIndex);
             var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            return new Date(result).toLocaleDateString("en-US", options)
+            var dateLastFullDose = new Date(result).toLocaleDateString("en-US", options);
+
+            
+            
+            const nLeftOver = trackDosesArray[trackDosesArray.length -1];
+
+            returnHtml = `<div class="h5 mt-3 ">Patient will complete their dosage.</div>
+                        <div class="h5 mt-3">They will take their last full dose on: </div>
+                        <div class="h4 mb-3" id="run-out">${dateLastFullDose}</div>
+                        <div class="h5 mb-3" id="">They will have ${nLeftOver} vial(s) left over.</div>`
+        
+        
+        } else{
+
+            
+            
+            for (var i = trackDosesArray.length - 1; i >= 0; i--) {
+                if(trackDosesArray[i] >= 0){
+                    var dayIndex = i;
+                    break;
+                }
+            }
+
+            
+            if(start==='tomorrow'){dayIndex = dayIndex + 1;}
+
+            
+            var someDate = new Date();
+            const result = someDate.setDate(someDate.getDate() + dayIndex);
+            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            var dateLastFullDose = new Date(result).toLocaleDateString("en-US", options);
+
+            
+            
+            
+            const nNeededTotal = trackDosesArray[trackDosesArray.length -1];
+            for (var i = trackDosesArray.length - 1; i >= 0; i--) {
+                if(trackDosesArray[i] >= 0){
+                    var doseIndex = i;
+                    break;
+                }
+            }
+            const nRemain = trackDosesArray[doseIndex];
+            console.log(nNeededTotal);
+            console.log(nRemain);
+            const nNeededToOrder = Math.abs(nNeededTotal) 
+
+            returnHtml = `<div class="h5 mt-3 ">Patient will <u>NOT</u> complete their dosage.</div>
+                        <div class="h5 mt-3">They will take their last full dose on: </div>
+                        <div class="h4 mb-3" id="run-out">${dateLastFullDose}</div>
+                        <div class="h5 mb-3" id="">You will need to order ${nNeededToOrder} more vial(s) for them to complete their schedule.</div>`
+
         }
+
+        return returnHtml
     }
 
 

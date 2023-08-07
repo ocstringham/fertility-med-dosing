@@ -1,0 +1,224 @@
+<script>
+    
+    // Add days for dose
+    function doseElem(n) {
+        return `<div class="text-right align-text-bottom" >
+                    <label for="" class="form-label">Day ${n}</label>
+                    <select class="form-select form-select-lg" name="" id="dose${n}">
+                        <option value="0" selected>Dose</option>
+                        <option value="1">75 units</option>
+                        <option value="2">150 units</option>
+                    </select>
+                </div>`
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        var doseMany1 = document.getElementById('all-doses-col1');
+        var doseMany2 = document.getElementById('all-doses-col2');
+        for (var i = 1; i < 7 ; i++) {
+            doseMany1.innerHTML += doseElem(i);
+            doseMany2.innerHTML += doseElem(i+6);
+        }
+    });
+
+    // EL for Submit
+    submitBut = document.getElementById("submit");
+    submitBut.addEventListener("click", function() {
+
+        // get quantity
+        var nVials = $('#quantity').val();
+        var valVials = document.getElementById("valVials"); // hidden text
+        var qBox = document.getElementById("quantity");
+
+        // Validate quantity
+        if(nVials===""){
+            // show text to input a number
+            valVials.removeAttribute("hidden");
+            // make border red
+            qBox.className = qBox.className + " border border-danger";  // this adds the error class
+        }else{
+
+            // make validation hidden again
+            valVials.setAttribute("hidden", true);
+            qBox.className = qBox.className.replace(" border border-danger", ""); 
+
+            // if current number entered then load calculate date fun
+            const outputHtml = calcOutputString();
+            $('#output-col').html(outputHtml);
+        }
+    });
+
+    // EL to reset output when numbers updated
+    defaultOutputHtml = `<br><br><br><br><br><br>`
+
+    document.addEventListener("DOMContentLoaded", function(){
+        $('#output-col').html(defaultOutputHtml);
+    });
+
+    numVials = document.getElementById("quantity");
+    numVials.addEventListener('change', function() {
+        $('#output-col').html(defaultOutputHtml);
+    });
+
+    // EL to reset output when dose changes
+    let dosesArray = document.querySelectorAll('[id^="dose"]');
+    dosesArray.forEach(function(elem) {
+        elem.addEventListener("change", function() {
+            $('#output-col').html(defaultOutputHtml);
+        });
+    });
+
+    // EL to reset output on different start date
+    startMed = document.getElementById("start");
+    startMed.addEventListener('change', function() {
+        $('#output-col').html(defaultOutputHtml);
+    });
+
+
+    // // reset form to default
+    // resetForm = document.getElementById("resetAll");
+    // resetForm.addEventListener('click', function() {
+    //     $("#input-col").trigger("reset");
+    //     return false; // prevent submitting
+    // });
+
+
+    // Calculate output: date or string if some left
+    function calcOutputString(){
+
+        // get values
+        var nVials = $('#quantity').val();
+        var start = $('#start').val();
+
+        // get all doses, loop over each div
+        var doses = document.querySelectorAll('[id^="dose"]');
+        const sumDoses = [];
+        for (var i = 0; i < doses.length; i++) {
+            sumDoses.push(parseInt(doses[i].value));
+        }
+
+        // get sum of doses = n_vials
+        const sumAllDoses = sumDoses.reduce((partialSum, a) => partialSum + a, 0);
+        // console.log(sumAllDoses);
+
+        // calc n vials remaining
+        // if(nVials > sumAllDoses){
+
+        //     const nLeft = nVials - sumAllDoses
+
+        //     return `<div class="h4 mt-3 mb-3">Patient will complete the specified schedule and will have</div>
+        //     <div class="h3 mb-3">${nLeft} vial(s) remaining.</div>`
+
+        // }else{
+
+            // get which day last full dose was used 
+            // loop over dose array
+            let trackVials = nVials;
+            var trackVialArray = [];
+            for (var i = 0; i < sumDoses.length; i++) {
+                trackVialArray.push(trackVials - sumDoses[i]);
+                trackVials = trackVials - sumDoses[i];
+            }
+            console.log(trackVialArray);
+
+            // Get day of last full dose = the last elem that was positive or zero, remove repeating elems
+            // get array of indices that are >= 0 
+            trackVialArrayPos = [];
+            for (var i = 0; i < trackVialArray.length; i++) {
+                
+                if(i === 0){
+                    if(trackVialArray[i] >= 0){
+                        trackVialArrayPos.push(i);
+                    }
+                }else{
+                    if(trackVialArray[i] <= 0 && trackVialArray[i-1] <= 0){
+                        continue;
+                    }else if(trackVialArray[i] < 0){
+                        continue;
+                    }else{
+                        trackVialArrayPos.push(i);
+                    }
+                }
+            }
+
+            console.log(trackVialArrayPos);
+
+            var nDaysLeftInd = trackVialArrayPos[trackVialArrayPos.length - 1];
+            var nDaysLeft = nDaysLeftInd;
+
+            // add in one day if start tomorrow
+            if(start==='tomorrow'){nDaysLeft = nDaysLeft + 1}
+
+            // add to today
+            var someDate = new Date();
+            const result = someDate.setDate(someDate.getDate() + nDaysLeft);
+
+            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            var date = new Date(result).toLocaleDateString("en-US", options)
+
+            // get n left over on day of last full dose
+            var nLeftOver = trackVialArray[nDaysLeftInd];
+            if(nLeftOver < 0){ nLeftOver = 0;}
+
+            // get n needed to get to full dose = n_remain
+            // n_remain = trackArray[last index]
+            var nNeededFullDose = Math.abs( trackVialArray[trackVialArray.length-1]);
+
+            // boolean for if dose schedule completed (if trackVialArray go negative)
+            let notCompletedDose = trackVialArray.some(v => v < 0);
+
+
+            if(nVials <= sumAllDoses){
+
+                if (! notCompletedDose){
+                    returnHtml = `<div class="h5 mt-3 ">Patient will complete their dosage. </div>
+                        <div class="h5 mt-3">They will take their last full dose on: </div>
+                        <div class="h4 mb-3" id="run-out">${date}</div>
+                        <div class="h5 mb-3" id="">They will have ${nLeftOver} vial(s) left over.</div>`
+                        //change box color
+
+                } else {
+                    returnHtml = `<div class="h5 mt-3 ">Patient will NOT complete their dosage.</div>
+                        <div class="h5 mt-3">They will take their last full dose on: </div>
+                        <div class="h4 mb-3" id="run-out">${date}</div>
+                        <div class="h5 mb-3" id="">They will need ${nNeededFullDose} more vial(s) to complete schedule.</div>`
+                }
+
+            // else if more vials than days
+            }else{
+
+                // get n left over
+                const nLeft = nVials - sumAllDoses
+
+
+                // get date = index of sumDoses that is not zero, start from back of array and go to front to detect a not zero
+                for (var i = sumDoses.length - 1; i >= 0; i--) {
+                    if(sumDoses[i] != 0){
+                        var nDays2 = i
+                    }
+                }
+
+                // add to today
+                var someDate2 = new Date();
+                const result2 = someDate2.setDate(someDate2.getDate() + nDays2);
+
+                var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                var date2 = new Date(result2).toLocaleDateString("en-US", options)
+
+
+
+                returnHtml = `<div class="h5 mt-3 ">Patient will complete their dosage. </div>
+                        <div class="h5 mt-3">They will take their last full dose on: </div>
+                        <div class="h4 mb-3" id="run-out">${date2}</div>
+                        <div class="h5 mb-3" id="">They will have ${nLeft} vial(s) left over.</div>`
+
+            }
+
+            return returnHtml
+        
+        // }
+    }
+
+
+
+</script>
