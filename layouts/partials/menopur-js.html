@@ -1,10 +1,4 @@
 <script>
-
-    // // height for cols
-    // $(document).ready(function(){
-    //     let height = $('#input-col').css('height');
-    //     $('#output-col').css('height', height);
-    // });
     
     // Add days for dose
     function doseElem(n) {
@@ -33,41 +27,48 @@
         // get quantity
         var currentNum = $('#quantity').val();
         var valVials = document.getElementById("valVials"); // hidden text
+        var qBox = document.getElementById("quantity");
 
         // Validate quantity
         if(currentNum===""){
+            // show text to input a number
             valVials.removeAttribute("hidden");
+            // make border red
+            qBox.className = qBox.className + " border border-danger";  // this adds the error class
         }else{
+
             // make validation hidden again
             valVials.setAttribute("hidden", true);
+            qBox.className = qBox.className.replace(" border border-danger", ""); 
 
             // if current number entered then load calculate date fun
             const date = calcDate();
             $('#run-out').html(date);
         }
-
-
-
     });
 
-    // EL to reset date when numbers updated
+    // EL to reset output when numbers updated
     numVials = document.getElementById("quantity");
     numVials.addEventListener('change', function() {
         $('#run-out').html("");
     });
 
-    // doseSelected = document.getElementById("dose");
-    // doseSelected.addEventListener('change', function() {
-    //     $('#run-out').html("");
-    // });
+    // EL to reset output when dose changes
+    let dosesArray = document.querySelectorAll('[id^="dose"]');
+    dosesArray.forEach(function(elem) {
+        elem.addEventListener("change", function() {
+            $('#run-out').html("");
+        });
+    });
 
+    // EL to reset output on different start date
     startMed = document.getElementById("start");
     startMed.addEventListener('change', function() {
         $('#run-out').html("");
     });
 
 
-    // Calculate date
+    // Calculate output: date
     function calcDate(){
 
         // get values

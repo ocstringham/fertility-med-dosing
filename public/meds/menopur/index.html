@@ -101,7 +101,7 @@
 
         <div class="mb-3 text-center">
             <label for="" class="form-label">Number of vials on hand: </label>
-            <input class="form-control-md text-center" type="number" 
+            <input class="form-control-md text-center" type="number" pattern="[0-9]*"
                     id="quantity" name="quantity" min="1" max="50">
             <small hidden id="valVials" class="form-text text-danger">Input a number</small>
         </div>
@@ -170,12 +170,6 @@
 
   
   <script>
-
-    
-    
-    
-    
-    
     
     
     function doseElem(n) {
@@ -204,21 +198,24 @@
         
         var currentNum = $('#quantity').val();
         var valVials = document.getElementById("valVials"); 
+        var qBox = document.getElementById("quantity");
 
         
         if(currentNum===""){
+            
             valVials.removeAttribute("hidden");
+            
+            qBox.className = qBox.className + " border border-danger";  
         }else{
+
             
             valVials.setAttribute("hidden", true);
+            qBox.className = qBox.className.replace(" border border-danger", ""); 
 
             
             const date = calcDate();
             $('#run-out').html(date);
         }
-
-
-
     });
 
     
@@ -228,10 +225,14 @@
     });
 
     
-    
-    
-    
+    let dosesArray = document.querySelectorAll('[id^="dose"]');
+    dosesArray.forEach(function(elem) {
+        elem.addEventListener("change", function() {
+            $('#run-out').html("");
+        });
+    });
 
+    
     startMed = document.getElementById("start");
     startMed.addEventListener('change', function() {
         $('#run-out').html("");

@@ -1,21 +1,16 @@
 to do
-- wait for SM feedback functionaly before design
-    - display results better?
-
-- EL to reset when new dose added
-- red outline for input a number error
+- clear all input button
 - wording for when still medicine left but not enough
     - Patient will take their last full dose on Date?
+    - calculate the above instead of what im currently doing
+- display results better?
+- page/site title (for head so it doesn't say home for every page)
+- other pages, once sm approves
 - number popup for mobile
-- page/site title
+--
 - favicon generic
 - google ads
-
-
-- clear all input button
-
-- other pages, once sm approves
-
+- page navigates to error when no number submitted
 
 
 done
@@ -24,3 +19,6 @@ done
 - google analytics
 - disclaimer
 - footer wording
+- responsive layout
+- red outline for input a number error
+- EL to reset when new dose added
