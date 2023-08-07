@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -52,9 +52,19 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-            <a class="nav-link" href='/about'>About</a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href='/about'>About</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Medicine
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/meds/cetrotide">Cetrotide</a>
+                    <a class="dropdown-item" href="/meds/menopur">Menopur</a>
+                    <a class="dropdown-item" href="/meds/gonalf">Gonal-f Pen</a>
+                </div>
+            </li>
         <li class="nav-item">
             <a class="nav-link" href='/disclaimer'>Disclaimer</a>
         </li>
@@ -83,7 +93,7 @@
     </ul>
 </div>
       
-<div class="col-sm-6 col-lg-5 mb-3">
+<div class="col-xs-auto col-sm-6 col-lg-5 mb-3 justify-content-center">
 
     <div  id="input-col" class="card mt-2 align-middle border rounded border-primary p-3">
 
@@ -96,7 +106,7 @@
             <small hidden id="valVials" class="form-text text-danger">Input a number</small>
         </div>
 
-        <div class="mb-2">
+        <div class="mb-3">
             <div class="text-center">
                 <label for="" class="form-label">The patient will start the medicine: </label>
                 <select class="form-select form-select-lg" name="" id="start">
@@ -108,12 +118,12 @@
 
 
         
-        <div class="mb-3">
-            <div class="row ">
-                
-                <div class='col-6' id="all-doses-col1"></div>
-                <div class='col-6' id="all-doses-col2"></div>
-            </div>
+        <div class="d-flex flex-row">
+            
+                <div class='d-flex flex-column justify-content-center col-xl-5 col-lg-6 col-md-6' id="all-doses-col1"></div>
+                <div class='d-flex flex-column justify-content-center col-xl-5 col-lg-6 col-md-6' id="all-doses-col2"></div>
+            
+            
         </div>
 
 
@@ -129,7 +139,7 @@
 
 
 <div class="col-sm-6 col-lg-5 mb-3">
-    <div id="output-col" class="card align-middle text-center mt-2 mr-2 border rounded border-primary">
+    <div id="output-col" class="card align-middle text-center mt-2 mr-1 border rounded border-primary">
         <div class="h5 mt-3 ">Medicine will run out on: </div>
         <div class="h4" id="run-out"></div>
     </div>
@@ -172,7 +182,7 @@
         return `<div class="text-right align-text-bottom" >
                     <label for="" class="form-label">Day ${n}</label>
                     <select class="form-select form-select-lg" name="" id="dose${n}">
-                        <option value="0" selected>Select Dose </option>
+                        <option value="0" selected>Dose</option>
                         <option value="1">75 units</option>
                         <option value="2">150 units</option>
                     </select>

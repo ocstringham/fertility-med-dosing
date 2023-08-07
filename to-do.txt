@@ -3,10 +3,14 @@ to do
     - display results better?
 
 - EL to reset when new dose added
+- red outline for input a number error
 - wording for when still medicine left but not enough
-- site title
+    - Patient will take their last full dose on Date?
+- number popup for mobile
+- page/site title
 - favicon generic
 - google ads
+
 
 - clear all input button
 

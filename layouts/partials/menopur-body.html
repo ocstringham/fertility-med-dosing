@@ -1,5 +1,5 @@
 <!-- Main Content -->
-<div class="col-sm-6 col-lg-5 mb-3">
+<div class="col-xs-auto col-sm-6 col-lg-5 mb-3 justify-content-center">
 
     <div  id="input-col" class="card mt-2 align-middle border rounded border-primary p-3">
 
@@ -12,7 +12,7 @@
             <small hidden id="valVials" class="form-text text-danger">Input a number</small>
         </div>
 
-        <div class="mb-2">
+        <div class="mb-3">
             <div class="text-center">
                 <label for="" class="form-label">The patient will start the medicine: </label>
                 <select class="form-select form-select-lg" name="" id="start">
@@ -24,12 +24,12 @@
 
 
         <!-- vary dose by day -->
-        <div class="mb-3">
-            <div class="row ">
-                <!-- <div class="h6"></div> -->
-                <div class='col-6' id="all-doses-col1"></div>
-                <div class='col-6' id="all-doses-col2"></div>
-            </div>
+        <div class="d-flex flex-row">
+            <!-- <div class="col-12 col-lg-offset-4"> -->
+                <div class='d-flex flex-column justify-content-center col-xl-5 col-lg-6 col-md-6' id="all-doses-col1"></div>
+                <div class='d-flex flex-column justify-content-center col-xl-5 col-lg-6 col-md-6' id="all-doses-col2"></div>
+            <!-- </div> -->
+            
         </div>
 
 
@@ -45,7 +45,7 @@
 
 <!-- Output: When med runs out -->
 <div class="col-sm-6 col-lg-5 mb-3">
-    <div id="output-col" class="card align-middle text-center mt-2 mr-2 border rounded border-primary">
+    <div id="output-col" class="card align-middle text-center mt-2 mr-1 border rounded border-primary">
         <div class="h5 mt-3 ">Medicine will run out on: </div>
         <div class="h4" id="run-out"></div>
     </div>
