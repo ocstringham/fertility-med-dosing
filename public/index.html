@@ -51,33 +51,33 @@
   
 <nav class="navbar navbar-expand-lg navbar-light bg-primary" data-bs-theme="dark">
     <div class="container-fluid">
-    <a class="navbar-brand" href="/">Fertility Medicine Dosing</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <a class="navbar-brand text-light" href="/">Fertility Medicine Dosing</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Medicine
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    
-                    <a class="dropdown-item" href="/meds/menopur">Menopur</a>
-                    <a class="dropdown-item" href="/meds/gonal-f">Gonal-f Pen</a>
-                </ul>
-              </li>
-        <li class="nav-item">
-            <a class="nav-link" href='/contact'>Contact</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href='/disclaimer'>Disclaimer</a>
-        </li>
-        </ul>
-    </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Medicine
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        
+                        <a class="dropdown-item" href="/meds/menopur">Menopur</a>
+                        <a class="dropdown-item" href="/meds/gonal-f">Gonal-f Pen</a>
+                    </ul>
+                </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href='/contact'>Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href='/disclaimer'>Disclaimer</a>
+            </li>
+            </ul>
+        </div>
     </div>
 </nav>
 
@@ -99,31 +99,59 @@
     </ul>
 </div>
 
-        <div class="col-xs-12 col-sm-8 col-md-6 ml-2 mt-3">
-          <div class="h4">
-            This website is designed to assist fertility nurses calculate doses for common fertility medicines.
+        <div class="col-xs-12 col-sm-8 col-md-6 ml-2 mt-3 mb-3 pb-3">
+          <div class="h5 text-center">
+            This website is designed to assist fertility nurses and patients with calculations for common fertility medicines.
           </div>
 
-          <div class="row">
+          <div class="row mt-3">
 
-            <div class="col-xs-12 col-sm-8 col-md-6">
+            <div class="col-xs-12 col-sm-8 col-md-6 mb-2">
               <div class="h6">
                   The information calculated is:
               </div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">The date the patient finishes their medicine</li>
-                  <li class="list-group-item">How much more medicine you might need to order or how much is left over</li>
+                  <li class="list-group-item">The date the patient will finish their medicine</li>
+                  <li class="list-group-item">How much more medicine needs to be ordered</li>
                 </ul>
             </div>
 
             <div class="col-xs-12 col-sm-8 col-md-6">
               <div class="h6">
-                The information the user provides is:
+                The information required is:
               </div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">The current amount of medicine on hand</li>
+                  <li class="list-group-item">The current amount of medicine on hand&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                   <li class="list-group-item">The dosage per day</li>
                 </ul>
+            </div>
+
+          </div>
+
+          <div class="row mt-3 mb-2 ml-2 justify-content-center">
+            <div class="h4">Choose from the following medications:</div>
+          </div>
+
+          <div class="row">
+
+            <div class="col">
+              <div class="card">
+                <a href="/meds/menopur" 
+                  class="btn btn-primary btn-block text-light" 
+                  role="button">
+                    Menopur
+                </a>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card">
+                <a href="/meds/gonal-f" 
+                  class="btn btn-primary btn-block text-light" 
+                  role="button">
+                    Gonal-F Pen
+                </a>
+              </div>
             </div>
 
           </div>
