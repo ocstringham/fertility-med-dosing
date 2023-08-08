@@ -2,14 +2,13 @@
     
     // Add days for dose
     function doseElem(n) {
-        return `<div class="text-right align-text-bottom" >
-                    <label for="" class="form-label">Day ${n}</label>
-                    <select class="form-select form-select-lg" name="" id="dose${n}">
-                        <option value="0" selected>Dose</option>
-                        <option value="1">75 units</option>
-                        <option value="2">150 units</option>
-                    </select>
-                </div>`
+        return `<div class="mb-3 text-center">
+            <label for="" class="form-label">Day ${n} </label>
+            <input class="form-control-md text-center" type="number" pattern="[0-9]*"
+                    onfocus="this.select();"        
+                    placeholder="Dose"
+                    id="dose${n}" name="dose" min="1" max="500">
+        </div>`
     }
 
     // document.addEventListener("DOMContentLoaded", function(){
@@ -26,21 +25,21 @@
     submitBut.addEventListener("click", function() {
 
         // get quantity
-        var nVials = $('#quantity').val();
-        var valVials = document.getElementById("valVials"); // hidden text
-        var qBox = document.getElementById("quantity");
+        var penQ = $('#quantity1').val();
+        var penCheck = document.getElementById("inputPenCheck"); // hidden text
+        var penQBox = document.getElementById("quantity1");
 
         // Validate quantity
-        if(nVials===""){
+        if(penQ==="0"){
             // show text to input a number
-            valVials.removeAttribute("hidden");
+            penCheck.removeAttribute("hidden");
             // make border red
-            qBox.className = qBox.className + " border border-danger";  // this adds the error class
+            penQBox.className = penQBox.className + " border border-danger";  // this adds the error class
         }else{
 
             // make validation hidden again
-            valVials.setAttribute("hidden", true);
-            qBox.className = qBox.className.replace(" border border-danger", ""); 
+            penCheck.setAttribute("hidden", true);
+            penQBox.className = penQBox.className.replace(" border border-danger", ""); 
 
             // if current number entered then load calculate date fun
             const outputHtml = calcOutputString();
@@ -55,7 +54,7 @@
         $('#output-col').html(defaultOutputHtml);
     });
 
-    numVials = document.getElementById("quantity");
+    numVials = document.getElementById("quantity1");
     numVials.addEventListener('change', function() {
         $('#output-col').html(defaultOutputHtml);
     });
@@ -75,43 +74,43 @@
     });
 
 
-    // // reset form to default
-    // resetForm = document.getElementById("resetAll");
-    // resetForm.addEventListener('click', function() {
-    //     $("#input-col").trigger("reset");
-    //     return false; // prevent submitting
-    // });
+    // reset form to default
+    resetForm = document.getElementById("resetAll");
+    resetForm.addEventListener('click', function() {
+        $("#input-col").trigger("reset");
+        return false; // prevent submitting
+    });
 
 
     // Calculate output: date or string if some left
     function calcOutputString(){
 
         // get values
-        var nVials = $('#quantity').val();
+        var penQ = $('#quantity1').val();
         var start = $('#start').val();
 
         // get all doses in array and sum, loop over each div
         var doses = document.querySelectorAll('[id^="dose"]');
         const dosesArray = [];
         for (var i = 0; i < doses.length; i++) {
+            if(doses[i].value == ""){doses[i].value="0";}
             dosesArray.push(parseInt(doses[i].value));
         }
 
         // sum of doses = n_vials
         const sumAllDoses = dosesArray.reduce((partialSum, a) => partialSum + a, 0);
-
         // get output array
-        let trackDoses = nVials;
+        let trackDoses = penQ;
         var trackDosesArray = [];
             for (var i = 0; i < dosesArray.length; i++) {
                 trackDosesArray.push(trackDoses - dosesArray[i]);
                 trackDoses = trackDoses - dosesArray[i];
             }
-        console.log(trackDosesArray);
+        // console.log(trackDosesArray);
 
 
         // if full schedule is completed (ie none or more than none leftover)
-        if(nVials >= sumAllDoses){
+        if(penQ >= sumAllDoses){
 
             // get date of last full dose for when schedule is complete
             // = index of dosesArray that is the first non zero from the end
@@ -137,7 +136,7 @@
 
             returnHtml = `<div class="h5 mt-3">The patient's last dose will be on: </div>
                         <div class="h4 mb-3" id="run-out">${dateLastFullDose}</div>
-                        <div class="h4 mb-3" id="">They will have ${nLeftOver} vial(s) left over.</div>`
+                        <div class="h4 mb-3" id="">They will have ${nLeftOver} units left over.</div>`
         
         // else not enough dose
         } else{
@@ -177,15 +176,15 @@
                 }
             }
             const nRemain = trackDosesArray[doseIndex];
-            console.log(nNeededTotal);
-            console.log(nRemain);
+            // console.log(nNeededTotal);
+            // console.log(nRemain);
             const nNeededToOrder = Math.abs(nNeededTotal) // + Math.abs(nRemain);
 
             returnHtml = `<div class="h5 mt-3">The patient's last dose will be on: </div>
                         <div class="h4 mb-3" id="run-out">${dateLastFullDose}</div>
-                        <div class="h5 mt-3">They will run out of Menopur on: </div>
+                        <div class="h5 mt-3">They will run out of Gonal-F on: </div>
                         <div class="h4 mb-3" id="run-out">${dateRunOut}</div>
-                        <div class="h5 mb-3 mt-3" id="">You will need to <u>order ${nNeededToOrder} more vial(s)</u>.</div>`
+                        <div class="h5 mb-3 mt-3" id="">They will need <u>${nNeededToOrder} more units</u>.</div>`
 
         }
 

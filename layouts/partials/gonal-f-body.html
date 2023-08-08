@@ -1,0 +1,62 @@
+<!-- Main Content -->
+<div class="col-xs-auto col-sm-6 col-lg-5 mb-3 justify-content-center">
+
+    <div  id="input-col" class="form card mt-2 p-3 align-middle border rounded border-primary">
+
+        <div class="h2 text-center mt-2 mb-3">Gonal-F Dosing</div>
+
+        <div class="mb-3">
+            <div class="text-center">
+                <label for="" class="form-label">Dose of Pen: </label>
+                <select class="form-select form-select-lg text-center" name="" id="quantity1">
+                    <option value="0" selected>Select Pen</option>
+                    <option value="400">300 Unit Pen (400 Units Total)</option>
+                    <option value="550">450 Unit Pen (550 Units Total)</option>
+                    <option value="1000">900 Unit Pen (1000 Units Total)</option>
+                </select>
+                <small hidden id="inputPenCheck" class="form-text text-danger">Select a Pen.</small>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <div class="text-center">
+                <label for="" class="form-label">The patient will start the medicine: </label>
+                <select class="form-select form-select-lg" name="" id="start">
+                    <option value="today">Today</option>
+                    <option value="tomorrow">Tomorrow</option>
+                </select>
+            </div>
+        </div>
+
+
+        <!-- vary dose by day -->
+        <div class="row text-center justify-content-center">
+            <label for="">Enter dose per day (number of units)</label>
+        </div>
+        <div class="d-flex flex-row">
+            <!-- <div class="col-12 col-lg-offset-4"> -->
+                <div class='d-flex flex-column justify-content-center col-xl-5 col-lg-6 col-md-6' id="all-doses-col1"></div>
+                <div class='d-flex flex-column justify-content-center col-xl-5 col-lg-6 col-md-6' id="all-doses-col2"></div>
+            <!-- </div> -->
+            
+        </div>
+
+
+        <!--  submit button -->
+        <div class="row justify-content-center mt-3">
+            <input name="submit" id="submit" class="btn btn-primary text-center" type="button" value="Submit">
+        </div>
+
+        <div class="row justify-content-center mt-3">
+            <small class=""><a onClick="window.location.reload();" id="resetAll" href="">Clear inputs</a></small>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Output: When med runs out -->
+<div class="col-sm-6 col-lg-5 mb-3">
+    <div id="output-col" class="card align-middle text-center mt-2 mr-1 border rounded border-primary">
+    </div>
+</div>

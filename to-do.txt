@@ -1,10 +1,4 @@
 to do
-- uniform output wording
-- wording for when still medicine left but not enough
-    - Patient will take their last full dose on Date?
-    - js calculate the above instead of what im currently doing
-- display results better?
-- page/site title (for head so it doesn't say home for every page)
 - other pages, once sm approves
 - contact for feedback and errors (formspree?)
 
@@ -28,3 +22,9 @@ done
 - EL to reset when new dose added
 - clear all input button
 - number popup for mobile
+- uniform output wording
+- wording for when still medicine left but not enough
+    - Patient will take their last full dose on Date?
+    - js calculate the above instead of what im currently doing
+- display results better?
+- page/site title (for head so it doesn't say home for every page)

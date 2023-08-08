@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+{{ partial "head.html" . }}
+<body>
+
+  <!-- navbar -->
+  {{ partial "navbar.html" . }}
+
+  <!--  container -->
+  <div class="container-fluid">
+    <div class="row h-100">
+      {{ partial "sidebar.html" . }}
+      {{ partial "gonal-f-body.html" . }}
+    </div>
+  </div>
+ 
+
+  <!-- footer -->
+  {{ partial "footer.html" . }}
+
+  <!-- js libs -->
+  {{ partial "js-libs.html" . }}
+
+  <!-- js -->
+  {{ partial "gonal-f-js.html" . }}
+
+  
+</body>
+
+</html>

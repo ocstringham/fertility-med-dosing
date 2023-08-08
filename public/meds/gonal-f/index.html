@@ -8,7 +8,7 @@
     <meta name="author" content="{        map[]}">
 
 
-    <title>Menopur Dosing</title>
+    <title>Gonal-F Dosing</title>
 
     
     
@@ -101,14 +101,19 @@
 
     <div  id="input-col" class="form card mt-2 p-3 align-middle border rounded border-primary">
 
-        <div class="h2 text-center mt-2 mb-3">Menopur Dosing</div>
+        <div class="h2 text-center mt-2 mb-3">Gonal-F Dosing</div>
 
-        <div class="mb-3 text-center">
-            <label for="" class="form-label">Number of vials on hand: </label>
-            <input class="form-control-md text-center" type="number" pattern="[0-9]*"
-                    onfocus="this.select();"        
-                    id="quantity" name="quantity" min="1" max="50">
-            <small hidden id="valVials" class="form-text text-danger">Input a number</small>
+        <div class="mb-3">
+            <div class="text-center">
+                <label for="" class="form-label">Dose of Pen: </label>
+                <select class="form-select form-select-lg text-center" name="" id="quantity1">
+                    <option value="0" selected>Select Pen</option>
+                    <option value="400">300 Unit Pen (400 Units Total)</option>
+                    <option value="550">450 Unit Pen (550 Units Total)</option>
+                    <option value="1000">900 Unit Pen (1000 Units Total)</option>
+                </select>
+                <small hidden id="inputPenCheck" class="form-text text-danger">Select a Pen.</small>
+            </div>
         </div>
 
         <div class="mb-3">
@@ -123,6 +128,9 @@
 
 
         
+        <div class="row text-center justify-content-center">
+            <label for="">Enter dose per day (number of units)</label>
+        </div>
         <div class="d-flex flex-row">
             
                 <div class='d-flex flex-column justify-content-center col-xl-5 col-lg-6 col-md-6' id="all-doses-col1"></div>
@@ -179,14 +187,13 @@
     
     
     function doseElem(n) {
-        return `<div class="text-right align-text-bottom" >
-                    <label for="" class="form-label">Day ${n}</label>
-                    <select class="form-select form-select-lg" name="" id="dose${n}">
-                        <option value="0" selected>Dose</option>
-                        <option value="1">75 units</option>
-                        <option value="2">150 units</option>
-                    </select>
-                </div>`
+        return `<div class="mb-3 text-center">
+            <label for="" class="form-label">Day ${n} </label>
+            <input class="form-control-md text-center" type="number" pattern="[0-9]*"
+                    onfocus="this.select();"        
+                    placeholder="Dose"
+                    id="dose${n}" name="dose" min="1" max="500">
+        </div>`
     }
 
     
@@ -203,21 +210,21 @@
     submitBut.addEventListener("click", function() {
 
         
-        var nVials = $('#quantity').val();
-        var valVials = document.getElementById("valVials"); 
-        var qBox = document.getElementById("quantity");
+        var penQ = $('#quantity1').val();
+        var penCheck = document.getElementById("inputPenCheck"); 
+        var penQBox = document.getElementById("quantity1");
 
         
-        if(nVials===""){
+        if(penQ==="0"){
             
-            valVials.removeAttribute("hidden");
+            penCheck.removeAttribute("hidden");
             
-            qBox.className = qBox.className + " border border-danger";  
+            penQBox.className = penQBox.className + " border border-danger";  
         }else{
 
             
-            valVials.setAttribute("hidden", true);
-            qBox.className = qBox.className.replace(" border border-danger", ""); 
+            penCheck.setAttribute("hidden", true);
+            penQBox.className = penQBox.className.replace(" border border-danger", ""); 
 
             
             const outputHtml = calcOutputString();
@@ -232,7 +239,7 @@
         $('#output-col').html(defaultOutputHtml);
     });
 
-    numVials = document.getElementById("quantity");
+    numVials = document.getElementById("quantity1");
     numVials.addEventListener('change', function() {
         $('#output-col').html(defaultOutputHtml);
     });
@@ -253,42 +260,42 @@
 
 
     
-    
-    
-    
-    
-    
+    resetForm = document.getElementById("resetAll");
+    resetForm.addEventListener('click', function() {
+        $("#input-col").trigger("reset");
+        return false; 
+    });
 
 
     
     function calcOutputString(){
 
         
-        var nVials = $('#quantity').val();
+        var penQ = $('#quantity1').val();
         var start = $('#start').val();
 
         
         var doses = document.querySelectorAll('[id^="dose"]');
         const dosesArray = [];
         for (var i = 0; i < doses.length; i++) {
+            if(doses[i].value == ""){doses[i].value="0";}
             dosesArray.push(parseInt(doses[i].value));
         }
 
         
         const sumAllDoses = dosesArray.reduce((partialSum, a) => partialSum + a, 0);
-
         
-        let trackDoses = nVials;
+        let trackDoses = penQ;
         var trackDosesArray = [];
             for (var i = 0; i < dosesArray.length; i++) {
                 trackDosesArray.push(trackDoses - dosesArray[i]);
                 trackDoses = trackDoses - dosesArray[i];
             }
-        console.log(trackDosesArray);
+        
 
 
         
-        if(nVials >= sumAllDoses){
+        if(penQ >= sumAllDoses){
 
             
             
@@ -314,7 +321,7 @@
 
             returnHtml = `<div class="h5 mt-3">The patient's last dose will be on: </div>
                         <div class="h4 mb-3" id="run-out">${dateLastFullDose}</div>
-                        <div class="h4 mb-3" id="">They will have ${nLeftOver} vial(s) left over.</div>`
+                        <div class="h4 mb-3" id="">They will have ${nLeftOver} units left over.</div>`
         
         
         } else{
@@ -354,15 +361,15 @@
                 }
             }
             const nRemain = trackDosesArray[doseIndex];
-            console.log(nNeededTotal);
-            console.log(nRemain);
+            
+            
             const nNeededToOrder = Math.abs(nNeededTotal) 
 
             returnHtml = `<div class="h5 mt-3">The patient's last dose will be on: </div>
                         <div class="h4 mb-3" id="run-out">${dateLastFullDose}</div>
-                        <div class="h5 mt-3">They will run out of Menopur on: </div>
+                        <div class="h5 mt-3">They will run out of Gonal-F on: </div>
                         <div class="h4 mb-3" id="run-out">${dateRunOut}</div>
-                        <div class="h5 mb-3 mt-3" id="">You will need to <u>order ${nNeededToOrder} more vial(s)</u>.</div>`
+                        <div class="h5 mb-3 mt-3" id="">They will need <u>${nNeededToOrder} more units</u>.</div>`
 
         }
 
