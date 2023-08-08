@@ -4,14 +4,12 @@ date: 2023-08-06
 layout: "default-text"
 ---
 
-
-
 <!-- modify this form HTML and place wherever you want your form -->
-<div class="container">
+<!-- <div class="container"> -->
   <div class="row">
     <div class="col-xs-12 col-sm-8 col-md-6 col-sm-push-2 col-md-push-3 form__container">
       <!-- <h2>Let's work together</h2> -->
-      <h5>If you have any feedback or identiy any errors please contact me using the below form.</h5>
+      <h5>If you have any feedback or identify any errors, please contact me using the below form.</h5>
       <form action="https://formspree.io/f/xaygenoo" role="form" method="POST" autocomplete="on">
         <div class="form-group">
           <label for="name">Your Name</label>
@@ -34,4 +32,4 @@ layout: "default-text"
     </div>
   </div>
 </div>
-</div>
+<!-- </div> -->

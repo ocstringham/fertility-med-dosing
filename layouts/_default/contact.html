@@ -10,10 +10,25 @@
   <div class="container-fluid">
     <div class="row h-100">
       {{ partial "sidebar.html" . }}
-        <div class="col-sm-12 col-md-12 col-lg-8 mb-3 mt-3">
+        <div class="col-sm-12 col-lg-10 mb-3 mt-3">
 
             {{ .Content }}
-            
+            <!-- modify this form HTML and place wherever you want your form -->
+<form
+  action="https://formspree.io/f/xaygenoo"
+  method="POST"
+>
+  <label>
+    Your email:
+    <input type="email" name="email">
+  </label>
+  <label>
+    Your message:
+    <textarea name="message"></textarea>
+  </label>
+  <!-- your other form fields go here -->
+  <button type="submit">Send</button>
+</form>
         </div>
     </div>
   </div>

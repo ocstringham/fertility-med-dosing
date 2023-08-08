@@ -1,15 +1,11 @@
 to do
-- other pages, once sm approves
-- contact for feedback and errors (formspree?)
-
---
-- favicon generic
 - google ads
 - page navigates to error when no number submitted
+- homepage
 
+maybe to do
+-
 
-maybe
-- clear all input button, change js
 
 done
 - footer
@@ -28,3 +24,7 @@ done
     - js calculate the above instead of what im currently doing
 - display results better?
 - page/site title (for head so it doesn't say home for every page)
+- other pages, once sm approves
+- contact for feedback and errors (formspree?)
+- favicon generic
+- clear all input button
