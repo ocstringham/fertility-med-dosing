@@ -1,7 +1,7 @@
 ---
 title: "Disclaimer"
 date: 2023-08-06
-layout: "disclaimer"
+layout: "default-text"
 ---
 
 ### DISCLAIMER
@@ -15,6 +15,13 @@ KIND INCURRED AS A RESULT OF THE USE OF THE SITE OR RELIANCE ON ANY INFORMATION
 PROVIDED ON THE SITE. YOUR USE OF THE SITE AND YOUR RELIANCE ON ANY INFORMATION
 ON THE SITE IS SOLELY AT YOUR OWN RISK.
 
+#### PROFESSIONAL DISCLAIMER
+The Site cannot and does not contain medical/health advice. The medical/health information is provided for
+general informational and educational purposes only and is not a substitute for professional advice.
+Accordingly, before taking any actions based upon such information, we encourage you to consult with the
+appropriate professionals. We do not provide any kind of medical/health advice. THE USE OR RELIANCE OF
+ANY INFORMATION CONTAINED ON THE SITE IS SOLELY AT YOUR OWN RISK.
+
 #### EXTERNAL LINKS DISCLAIMER
 The Site may contain (or you may be sent through the Site) links to other websites or content belonging to or
 originating from third parties or links to websites and features in banners or other advertising. Such external
@@ -25,12 +32,5 @@ WEBSITES LINKED THROUGH THE SITE OR ANY WEBSITE OR FEATURE LINKED IN ANY BANNER 
 OTHER ADVERTISING. WE WILL NOT BE A PARTY TO OR IN ANY WAY BE RESPONSIBLE FOR
 MONITORING ANY TRANSACTION BETWEEN YOU AND THIRD-PARTY PROVIDERS OF PRODUCTS
 OR SERVICES.
-#### PROFESSIONAL DISCLAIMER
-The Site cannot and does not contain medical/health advice. The medical/health information is provided for
-general informational and educational purposes only and is not a substitute for professional advice.
-Accordingly, before taking any actions based upon such information, we encourage you to consult with the
-appropriate professionals. We do not provide any kind of medical/health advice. THE USE OR RELIANCE OF
-ANY INFORMATION CONTAINED ON THE SITE IS SOLELY AT YOUR OWN RISK.
-
 
 This disclaimer was created using Termly's Disclaimer Generator.
