@@ -2,3 +2,8 @@ baseURL = ''
 languageCode = 'en-us'
 title = 'Fertility Medicine Dosing'
 builddrafts = true 
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
