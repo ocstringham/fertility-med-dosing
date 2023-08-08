@@ -1,7 +1,7 @@
 to do
 - google ads
 - page navigates to error when no number submitted
-- homepage
+
 
 maybe to do
 -
@@ -28,3 +28,4 @@ done
 - contact for feedback and errors (formspree?)
 - favicon generic
 - clear all input button
+- homepage
